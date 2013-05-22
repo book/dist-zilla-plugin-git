@@ -48,7 +48,7 @@ has _all_versions => (
   is => 'ro',  isa=>'ArrayRef',  init_arg => undef,  lazy => 1,
   default => sub {
     my $self = shift;
-    my $v = _versions_from_tags($self->version_regexp, [ $self->git->tag ]);
+    my $v = _versions_from_tags($self->version_regexp, [ $self->git->tag( '-l' ) ]);
     if ($self->logger->get_debug) {
       $self->log_debug("Found version $_") for @$v;
     }
